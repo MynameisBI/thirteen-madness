@@ -1,0 +1,1 @@
+GS = require 'libs.gamestate'
