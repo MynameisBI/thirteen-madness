@@ -1,10 +1,13 @@
-local socket = require 'socket'
+require 'globals'
+
 local address, port = '192.168.100.10', 12345
 
+local Menu = require 'gamestates.menu'
+local Game = require 'gamestates.game'
+
 function love.load()
-	udp = socket.udp()
-	udp:settimeout(0)
-	udp:setpeername(address, port)
+	GS.switch(Menu)
+	GS.registerEvents()
 end
 
 function love.update(dt)
@@ -12,13 +15,10 @@ function love.update(dt)
 end
 
 function love.draw()
-	love.graphics.print('press space to join')
+
 end
 
 function love.keypressed(key)
-	if key == 'space' then
-		local dg = string.format('%s %s %d', '', 'join', 0)
-		udp:send(dg)
-	end
+
 end
 

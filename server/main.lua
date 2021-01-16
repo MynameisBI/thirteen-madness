@@ -2,9 +2,9 @@ require 'globals'
 socket = require 'socket'
 
 ---- Networking ----
-udp = socket.udp()
-udp:settimeout(0)
-udp:setsockname('*', 12345)
+UDP = socket.udp()
+UDP:settimeout(0)
+UDP:setsockname('*', 12345)
 
 
 ---- Game managing ----
@@ -15,6 +15,7 @@ local currentPlayerTurnIndex = 1
 
 
 ---- Main functions ----
+--[[
 local player = Player()
 player:addCard(Card(CardRank.Ace, CardSuit.Spades))
 player:addCard(Card(CardRank.Three, CardSuit.Spades))
@@ -24,6 +25,7 @@ player:addCard(Card(CardRank.King, CardSuit.Hearts))
 for i = 1, 5 do
 	print(tostring(player.cards[i].rank)..':'..tostring(player.cards[i].suit))
 end
+]]--
 
 function updateGameState()
 
@@ -32,28 +34,38 @@ end
 
 
 ---- Server loop ----
-local running = true
+function love.update(dt)
+	repeat
+		local data, ip, port = UDP:receivefrom()
+		if data then
+			local command, index, params = data:match("^(%S*) (%S*) (.*)")
 
-print('Begin server loop...')
-while running do
-	local data, ip, port = udp:receivefrom()
-	if data then
-		index, command, params = data:match("^(%S*) (%S*) (.*)")
+			if command == 'join' then
+				local playerName = params:match('(%S*)')
+				print(playerName..' has joined')
 
-		if command == 'join' then
-			print('add player')
+				if #players < 4 then
+					UDP:sendto(
+						string.format('%s %d', 'confirmJoint', #players+1),
+						ip, port
+					)
 
-		else
-			print("unrecognised command:", cmd)
+				elseif #players >= 4 then
+					UDP:sendto(
+						string.format('%s %d', 'confirmJoint', 0),
+						ip, port
+					)
+				end
+
+			else
+				print("unrecognised command:", cmd)
+			end
+
+		elseif ip ~= 'timeout' then
+			error("Unknown network error: "..tostring(msg))
 		end
+	until not data
 
-	elseif ip ~= 'timeout' then
-		error("Unknown network error: "..tostring(msg))
-	end
-
-	socket.sleep(0.01)
+	socket.sleep(0.02)
 end
-
-
-
 
