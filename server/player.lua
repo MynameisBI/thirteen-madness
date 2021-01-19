@@ -1,8 +1,9 @@
 local Player = Class('Player')
 
-function Player:initialize(name, ip)
+function Player:initialize(name, ip, port)
 	self.name = name
 	self.ip = ip
+	self.port = port
 
 	self.isReady = false
 

@@ -40,6 +40,8 @@ function love.update(dt)
 		if data then
 			local command, index, params = data:match("^(%S*) (%S*) (.*)")
 
+
+			---- join ----
 			if command == 'join' then
 				local playerName = params:match('(%S*)')
 				print(playerName..' has joined')
@@ -56,6 +58,14 @@ function love.update(dt)
 						ip, port
 					)
 				end
+
+				local player = Player(playerName, ip, port)
+				table.insert(players, player)
+
+				if #players == 4 then
+					print('start game')
+				end
+
 
 			else
 				print("unrecognised command:", cmd)
