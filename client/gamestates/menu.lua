@@ -8,7 +8,7 @@ function Menu:enter()
 	self.suit = Suit.new()
 
 	self.name = {text = ''}
-	self.serverIp = {text = ''}
+	self.serverIp = {text = '192.168.100.10'}
 	self.index = nil
 end
 
@@ -53,11 +53,8 @@ function Menu:update(dt)
 				if index == 0 then
 					print('room is full')
 				elseif 1 <= index and index <= 4 then
-					GS.switch(Game)
+					GS.switch(Game, index)
 				end
-
-			elseif command == 'update' then
-
 
 			else
 				print('unrecognized command: '..tostring(command))

@@ -1,5 +1,6 @@
 ---- Libraries
 Class = require 'libs.middleclass'
+Suit = require 'libs.suit'
 
 
 ---- Enums

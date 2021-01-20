@@ -13,8 +13,12 @@ local players = {}
 local roundCombination, roundStrongestCard, roundSequenceLength
 local currentPlayerTurnIndex = 1
 
+math.randomseed(os.time())
 
----- Main functions ----
+
+---- GUI ----
+local suit = Suit.new()
+
 --[[
 local player = Player()
 player:addCard(Card(CardRank.Ace, CardSuit.Spades))
@@ -27,14 +31,10 @@ for i = 1, 5 do
 end
 ]]--
 
-function updateGameState()
-
-end
-
-
 
 ---- Server loop ----
 function love.update(dt)
+	---- Receiving ----
 	repeat
 		local data, ip, port = UDP:receivefrom()
 		if data then
@@ -46,26 +46,21 @@ function love.update(dt)
 				local playerName = params:match('(%S*)')
 				print(playerName..' has joined')
 
-				if #players < 4 then
+				local player = Player(playerName, ip, port)
+				table.insert(players, player)
+
+				if #players <= 4 then
 					UDP:sendto(
-						string.format('%s %d', 'confirmJoint', #players+1),
+						string.format('%s %d', 'confirmJoint', #players),
 						ip, port
 					)
 
-				elseif #players >= 4 then
+				elseif #players > 4 then
 					UDP:sendto(
 						string.format('%s %d', 'confirmJoint', 0),
 						ip, port
 					)
 				end
-
-				local player = Player(playerName, ip, port)
-				table.insert(players, player)
-
-				if #players == 4 then
-					print('start game')
-				end
-
 
 			else
 				print("unrecognised command:", cmd)
@@ -77,5 +72,48 @@ function love.update(dt)
 	until not data
 
 	socket.sleep(0.02)
+
+
+	---- GUI ----
+	if #players == 1 then
+		if suit:Button('START GAME', 10, 10, 100, 30).hit then
+			startGame()
+		end
+	end
 end
 
+---- Start game
+function startGame()
+	local deck = createDeck()
+
+	for i = 1, 13 do
+		for j = 1, #players do
+			local cardIndex = math.random(1, #deck)
+			local card = deck[cardIndex]
+			table.remove(deck, cardIndex)
+
+			UDP:sendto(
+				string.format('%s %d %d', 'addCard', card.rank, card.suit),
+				players[j].ip, players[j].port
+			)
+		end
+	end
+end
+
+function createDeck()
+	local deck = {}
+
+	for rank = 1, 13 do
+		for suit = 1, 4 do
+			local card = Card(rank, suit)
+			table.insert(deck, card)
+		end
+	end
+
+	return deck
+end
+
+
+function love.draw()
+	suit:draw()
+end
