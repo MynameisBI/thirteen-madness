@@ -75,7 +75,7 @@ function love.update(dt)
 
 
 	---- GUI ----
-	if #players == 1 then
+	if #players >= 1 then
 		if suit:Button('START GAME', 10, 10, 100, 30).hit then
 			startGame()
 		end
