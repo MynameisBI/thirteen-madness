@@ -8,7 +8,7 @@ function Menu:enter()
 	self.suit = Suit.new()
 
 	self.name = {text = ''}
-	self.serverIp = {text = '192.168.100.10'}
+	self.serverIp = {text = 'localhost'}
 	self.index = nil
 end
 

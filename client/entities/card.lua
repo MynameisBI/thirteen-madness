@@ -5,17 +5,27 @@ function Card:initialize(rank, suit)
 
 	self.rank = rank
 	self.suit = suit
+	self.id = tostring(self.rank)..'-'..tostring(self.suit)
 
 	self.selected = false
 end
 
 function Card:update(ox, oy)
-	ox = ox - 30
-	---- lúc chơi thì and oy - 40 thôi, đang debug nên -75 để thấy bài cho rõ
-	oy = self.selected and oy - 75 or oy
+	ox = ox - 35
+	---- lúc choi thì and oy - 50 thôi, đang debug nên -75 đe thấy bài cho rõ
+	oy = self.selected and oy - 50 or oy
 
-	if self.gui:Button(tostring(self.rank)..':'..tostring(self.suit),
-			ox , oy, 80, 100).hit then
+	---- For code debugging
+	--[[
+	if self.gui:ImageButton(tostring(self.rank)..'-'..tostring(self.suit),
+			ox, oy, 80, 110).hit then
+		self:toggleSelection()
+	end
+	]]--
+
+	---- For art debugging
+	if self.gui:ImageButton(Sprites.cards[tostring(self.rank)..'-'..tostring(self.suit)],
+			{id = self.id}, ox, oy).hit then
 		self:toggleSelection()
 	end
 end

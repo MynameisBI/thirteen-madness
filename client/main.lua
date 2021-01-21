@@ -1,4 +1,5 @@
 require 'globals'
+require 'assets'
 
 local Menu = require 'gamestates.menu'
 local Game = require 'gamestates.game'

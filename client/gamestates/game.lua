@@ -49,7 +49,7 @@ function Game:update(dt)
 	for i = #self.cards, 1, -1 do
 		self.cards[i]:update(
 			ScreenWidth/2 + DistBetweenCards * (-#self.cards/2 + (i-1)),
-			ScreenHeight - 120
+			ScreenHeight - 140
 		)
 	end
 end
