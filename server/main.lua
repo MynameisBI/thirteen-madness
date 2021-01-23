@@ -79,6 +79,7 @@ function love.update(dt)
 	if #players >= 1 then
 		if suit:Button('START GAME', 10, 10, 100, 30).hit then
 			startGame()
+			updateGameState()
 		end
 	end
 end
@@ -99,6 +100,8 @@ function startGame()
 			)
 		end
 	end
+
+	currentPlayerTurnIndex = 1
 end
 
 function createDeck()
@@ -112,6 +115,31 @@ function createDeck()
 	end
 
 	return deck
+end
+
+function updateGameState()
+	local playersCardLeft = {}
+	for i = 1, 4 do
+		if players[i] ~= nil then
+			playersCardLeft[i] = #players[i].cards
+		else
+			playersCardLeft[i] = 0
+		end
+	end
+
+	local rank = tostring(roundStrongestCard ~= nil and roundStrongestCard.rank or nil)
+	local suit = tostring(roundStrongestCard ~= nil and roundStrongestCard.suit or nil)
+
+	for i = 1, #players do
+		UDP:sendto(
+			string.format('%s %d %s %s %s-%s %d-%d-%d-%d', 'update',
+				currentPlayerTurnIndex, tostring(roundCombination), tostring(roundSequenceLength),
+				rank, suit,
+				playersCardLeft[1], playersCardLeft[2], playersCardLeft[3], playersCardLeft[4]
+			),
+			players[i].ip, players[i].port
+		)
+	end
 end
 
 

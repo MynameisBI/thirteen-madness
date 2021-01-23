@@ -15,18 +15,15 @@ function Card:update(ox, oy)
 	---- lúc choi thì and oy - 50 thôi, đang debug nên -75 đe thấy bài cho rõ
 	oy = self.selected and oy - 50 or oy
 
-	---- For code debugging
-	--[[
-	if self.gui:ImageButton(tostring(self.rank)..'-'..tostring(self.suit),
-			ox, oy, 80, 110).hit then
-		self:toggleSelection()
-	end
-	]]--
+	if Sprites.cards[self.id] ~= nil then
+		if self.gui:ImageButton(Sprites.cards[self.id], {id = self.id}, ox, oy).hit then
+			self:toggleSelection()
+		end
 
-	---- For art debugging
-	if self.gui:ImageButton(Sprites.cards[tostring(self.rank)..'-'..tostring(self.suit)],
-			{id = self.id}, ox, oy).hit then
-		self:toggleSelection()
+	else
+		if self.gui:Button(self.id, ox, oy, 80, 110).hit then
+			self:toggleSelection()
+		end
 	end
 end
 

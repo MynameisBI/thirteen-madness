@@ -28,14 +28,14 @@ long_line_behaviour=1
 long_line_column=80
 
 [files]
-current_page=5
-FILE_NAME_0=1;Lua;0;EUTF-8;1;1;0;D%3A%5CProjects%5CLove2d%5CMultiplayer%5CThirteen%5Cthirteen-madness%5Cserver%5Cmain.lua;0;2
-FILE_NAME_1=135;Lua;0;EUTF-8;1;1;0;D%3A%5CProjects%5CLove2d%5CMultiplayer%5CThirteen%5Cthirteen-madness%5Cclient%5Cmain.lua;0;2
-FILE_NAME_2=779;Lua;0;EUTF-8;1;1;0;D%3A%5CProjects%5CLove2d%5CMultiplayer%5CThirteen%5Cthirteen-madness%5Cclient%5Cgamestates%5Cgame.lua;0;2
-FILE_NAME_3=0;Lua;0;EUTF-8;1;1;0;D%3A%5CProjects%5CLove2d%5CMultiplayer%5CThirteen%5Cthirteen-madness%5Cclient%5Cgamestates%5Cmenu.lua;0;2
-FILE_NAME_4=137;Lua;0;EUTF-8;1;1;0;D%3A%5CProjects%5CLove2d%5CMultiplayer%5CThirteen%5Cthirteen-madness%5Cclient%5Cassets.lua;0;2
-FILE_NAME_5=683;Lua;0;EUTF-8;1;1;0;D%3A%5CProjects%5CLove2d%5CMultiplayer%5CThirteen%5Cthirteen-madness%5Cclient%5Centities%5Ccard.lua;0;2
-FILE_NAME_6=85;Lua;0;EUTF-8;1;1;0;D%3A%5CProjects%5CLove2d%5CMultiplayer%5CThirteen%5Cthirteen-madness%5Cclient%5Cconf.lua;0;2
+current_page=4
+FILE_NAME_0=2259;Lua;0;EUTF-8;1;1;0;D%3A%5CProjects%5CLove2d%5CMultiplayer%5CThirteen%5Cthirteen-madness%5Cserver%5Cmain.lua;0;2
+FILE_NAME_1=85;Lua;0;EUTF-8;1;1;0;D%3A%5CProjects%5CLove2d%5CMultiplayer%5CThirteen%5Cthirteen-madness%5Cclient%5Cconf.lua;0;2
+FILE_NAME_2=52;Lua;0;EUTF-8;1;1;0;D%3A%5CProjects%5CLove2d%5CMultiplayer%5CThirteen%5Cthirteen-madness%5Cclient%5Cassets.lua;0;2
+FILE_NAME_3=151;Lua;0;EUTF-8;1;1;0;D%3A%5CProjects%5CLove2d%5CMultiplayer%5CThirteen%5Cthirteen-madness%5Cclient%5Cmain.lua;0;2
+FILE_NAME_4=2940;Lua;0;EUTF-8;1;1;0;D%3A%5CProjects%5CLove2d%5CMultiplayer%5CThirteen%5Cthirteen-madness%5Cclient%5Cgamestates%5Cgame.lua;0;2
+FILE_NAME_5=642;Lua;0;EUTF-8;1;1;0;D%3A%5CProjects%5CLove2d%5CMultiplayer%5CThirteen%5Cthirteen-madness%5Cclient%5Centities%5Ccard.lua;0;2
+FILE_NAME_6=0;Lua;0;EUTF-8;1;1;0;D%3A%5CProjects%5CLove2d%5CMultiplayer%5CThirteen%5Cthirteen-madness%5Cclient%5Cglobals.lua;0;2
 
 [VTE]
 last_dir=/home/pi
@@ -50,9 +50,9 @@ external_dirs=
 show_empty_dirs=true
 
 [build-menu]
-EX_00_LB=Execute Server
+EX_00_LB=Execute Client
 EX_00_CM=lovec .
-EX_00_WD=D:\\Projects\\Love2d\\Multiplayer\\Thirteen\\thirteen-madness\\server
-EX_01_LB=Execute Client
+EX_00_WD=D:\\Projects\\Love2d\\Multiplayer\\Thirteen\\thirteen-madness\\client
+EX_01_LB=Execute Server
 EX_01_CM=lovec .
-EX_01_WD=D:\\Projects\\Love2d\\Multiplayer\\Thirteen\\thirteen-madness\\client
+EX_01_WD=D:\\Projects\\Love2d\\Multiplayer\\Thirteen\\thirteen-madness\\server

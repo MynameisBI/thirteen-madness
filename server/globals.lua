@@ -8,7 +8,7 @@ Combinations = {
 	Single = 1,
 	Double = 2,
 	Triple = 3,
-	Quadruple = 4,
+	Quadruple = 4, -- Four of a kind
 
 	Sequence = 5,
 	DoubleSequence = 6
